@@ -226,36 +226,16 @@
       const revenue = calculateRevenue(facilities.join(', '), duration);
       const bookingID = Date.now().toString();
 
-      // Add thank-you message
+      // Update status with submission message
       const statusDiv = document.getElementById('status');
       statusDiv.innerHTML = `
         <div class="thank-you">
           🎉 Thank you for your booking! 🌟<br>
-          Your request has been received, and we’ll get back to you within 24 hours. ⏳<br><br>
+          Your request is being processed, and an email confirmation will be sent if successful. ⏳<br><br>
           🌟 Because of you, 10 students will walk into school with confidence, dignity, and hope. ❤️<br>
           Your support means more than you know! 🎉<br><br>
         </div>
       `;
-
-      // Simulate email
-      const subject = "XD School Booking Confirmation";
-      const message = `
-        Dear ${name},\n\n
-        Thank you for your booking! 🌟\n
-        Details:\n
-        - Full Name: ${name}\n
-        - Email: ${email}\n
-        - Phone: ${phone}\n
-        - Facilities: ${facilities.join(', ')}\n
-        - Date: ${date}\n
-        - Time: ${time}\n
-        - Duration: ${duration} hour(s)\n
-        - Total Revenue: $${revenue}\n\n
-        Please proceed to payment: https://example.com/payment?booking=${bookingID}\n\n
-        Best regards,\n
-        XD School Team
-      `;
-      alert(`Email sent to ${email}:\n${message}`); // Simulated email
 
       const data = {
         name,
@@ -280,10 +260,11 @@
       })
       .then(() => {
         console.log('Data submitted to Google Sheet');
+        statusDiv.innerHTML += '<p style="color: #00ff00;">✅ Submission successful. Check your email!</p>';
       })
       .catch(error => {
         console.error('Error submitting data:', error);
-        statusDiv.innerHTML += '<p style="color: #ff4444;">⚠️ Submission to Google Sheet failed. Please try again or contact support.</p>';
+        statusDiv.innerHTML += '<p style="color: #ff4444;">⚠️ Submission failed. Please try again or contact support.</p>';
       });
     }
 
