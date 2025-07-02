@@ -3,204 +3,635 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XD School Booking</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>XD School Booking System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #004e92, #000428);
-      color: #ffffff;
+    :root {
+      --primary: #004e92;
+      --secondary: #000428;
+      --accent: #00e5ff;
+      --light: #b3ecff;
+      --success: #4CAF50;
+      --danger: #f44336;
+      --dark: #001f3f;
+      --card-bg: rgba(255, 255, 255, 0.1);
+    }
+    
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: #ffffff;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+    
     header {
-      background-color: #002b5c;
-      padding: 20px;
+      background-color: var(--dark);
+      padding: 15px 20px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    header img {
-      height: 60px;
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo img {
+      height: 50px;
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--accent), #00ffcc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+    
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+    
+    nav a:hover {
+      color: var(--accent);
+      background: rgba(255,255,255,0.1);
+    }
+    
     .hero {
+      max-width: 1200px;
+      margin: 30px auto;
       padding: 40px 20px;
       text-align: center;
     }
+    
     .hero h1 {
-      font-size: 2.5rem;
-      color: #00e5ff;
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+      text-shadow: 0 2px 10px rgba(0,229,255,0.4);
     }
+    
     .hero p {
-      font-size: 1.2rem;
-      color: #b3ecff;
+      font-size: 1.3rem;
+      color: var(--light);
+      max-width: 800px;
+      margin: 0 auto 25px;
+      line-height: 1.7;
     }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .stat-card {
+      background: rgba(0,0,0,0.2);
+      padding: 20px;
+      border-radius: 12px;
+      min-width: 200px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .stat-card i {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+    
+    .stat-card h3 {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+    
+    .stat-card p {
+      font-size: 1rem;
+      color: var(--light);
+    }
+    
     .container {
-      max-width: 700px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-width: 900px;
+      margin: 30px auto;
+      background: var(--card-bg);
+      padding: 35px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+    
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
+    
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+    
     label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       font-weight: 600;
+      font-size: 1.1rem;
     }
+    
+    label i {
+      margin-right: 8px;
+      color: var(--accent);
+    }
+    
     input[type="text"],
     input[type="email"],
     input[type="tel"],
     input[type="date"],
     select {
       width: 100%;
-      padding: 12px;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
+      padding: 14px;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.2);
+      color: white;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
     }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,229,255,0.3);
+    }
+    
     .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
     }
+    
     .checkbox-group label {
       display: flex;
       align-items: center;
       background-color: rgba(0,0,0,0.2);
-      padding: 8px;
-      border-radius: 6px;
-    }
-    .checkbox-group input[type="checkbox"] {
-      margin-right: 10px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #00e5ff;
-      color: #000428;
-      font-weight: bold;
-      font-size: 1.1rem;
-      border: none;
+      padding: 14px;
       border-radius: 8px;
       cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
     }
-    #status {
-      margin-top: 20px;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.3);
+    
+    .checkbox-group label:hover {
+      background-color: rgba(0,0,0,0.3);
+      border-color: rgba(0,229,255,0.3);
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 12px;
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+    }
+    
+    .form-rules {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    
+    .form-rules input {
+      width: 20px;
+      height: 20px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(to right, var(--accent), #00ffcc);
+      color: var(--dark);
+      font-weight: bold;
+      font-size: 1.2rem;
+      border: none;
       border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,229,255,0.3);
     }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,229,255,0.5);
+    }
+    
+    button:active {
+      transform: translateY(-1px);
+    }
+    
+    #status {
+      margin-top: 30px;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    
+    .confirmation {
+      display: none;
+    }
+    
+    .confirmation.active {
+      display: block;
+    }
+    
+    .confirmation h3 {
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .confirmation-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .detail-card {
+      background: rgba(0,0,0,0.15);
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
+    }
+    
+    .detail-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+    
+    .detail-card p {
+      font-size: 1.1rem;
+    }
+    
+    .revenue-impact {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(to right, rgba(0,78,146,0.4), rgba(0,4,40,0.4));
+      border-radius: 12px;
+      margin: 25px 0;
+    }
+    
     .qr-code {
       text-align: center;
       margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
+    
     .qr-code img {
       width: 150px;
       height: 150px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
     }
-    .qr-code a {
-      color: #00ffcc;
+    
+    .qr-text {
+      margin-top: 15px;
+      font-size: 1.1rem;
+    }
+    
+    .qr-text a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .qr-text a:hover {
       text-decoration: underline;
     }
+    
     footer {
+      max-width: 1200px;
+      margin: 40px auto 0;
       text-align: center;
-      padding: 20px;
-      background-color: #001f3f;
+      padding: 25px;
+      background-color: var(--dark);
+      border-radius: 15px;
       color: #aaa;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .social-links a {
+      color: var(--light);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .alert-error {
+      background: rgba(244, 67, 54, 0.2);
+      border: 1px solid var(--danger);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .confirmation-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="xdschools-logo.jpg" alt="XD Schools Logo">
+    <div class="header-content">
+      <div class="logo">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMGU1ZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMiA5aDRhMiAyIDAgMCAxIDIgMnYyYTIgMiAwIDAgMS0yIDJIMnYtNnptMTYgMGg0djZoLTJhMiAyIDAgMCAxLTItMnYtMmEyIDIgMCAwIDEgMi0yem0tOCA0aDR2LTZoLTR2NnptNi00YTIgMiAwIDEgMS00IDAgMiAyIDAgMCAxIDQgMHoiLz48L3N2Zz4=" alt="XD Schools Logo">
+        <div class="logo-text">XD School</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-calendar-alt"></i> Bookings</a></li>
+          <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="#"><i class="fas fa-phone"></i> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  <div class="hero">
-    <h1>XD School Booking</h1>
+  
+  <section class="hero">
+    <h1>XD School Booking System</h1>
     <p>🎯 Book, Play, Empower! 🌟 Transform lives with every booking—support 10 underprivileged students to shine brightly! 💖</p>
-  </div>
-  <div class="container">
-    <div class="form-group">
-      <label for="name">📝 Full Name</label>
-      <input type="text" id="name" placeholder="e.g., John Doe" required>
-    </div>
-    <div class="form-group">
-      <label for="email">📧 Email</label>
-      <input type="email" id="email" placeholder="e.g., john@example.com" required>
-    </div>
-    <div class="form-group">
-      <label for="phone">📞 Phone (+60)</label>
-      <input type="tel" id="phone" pattern="^\+60[0-9]{8,10}$" placeholder="+60123456789" required>
-    </div>
-    <div class="form-group">
-      <label>🏟️ Facilities (select one or more)</label>
-      <div class="checkbox-group" id="facility-options">
-        <label><input type="checkbox" value="Swimming Pool ($23/hr)"> Swimming Pool ($23/hr)</label>
-        <label><input type="checkbox" value="Football Field A ($15/hr)"> Football Field A ($15/hr)</label>
-        <label><input type="checkbox" value="Football Field B ($15/hr)"> Football Field B ($15/hr)</label>
-        <label><input type="checkbox" value="Tennis Court A ($12/hr)"> Tennis Court A ($12/hr)</label>
-        <label><input type="checkbox" value="Tennis Court B ($12/hr)"> Tennis Court B ($12/hr)</label>
-        <label><input type="checkbox" value="Tennis Court C ($12/hr)"> Tennis Court C ($12/hr)</label>
-        <label><input type="checkbox" value="Volleyball Court A ($12/hr)"> Volleyball Court A ($12/hr)</label>
-        <label><input type="checkbox" value="Volleyball Court B ($12/hr)"> Volleyball Court B ($12/hr)</label>
-        <label><input type="checkbox" value="Volleyball Court C ($12/hr)"> Volleyball Court C ($12/hr)</label>
+    
+    <div class="hero-stats">
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <h3>1,250+</h3>
+        <p>Students Supported</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-calendar-check"></i>
+        <h3>4,800+</h3>
+        <p>Bookings Made</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-donate"></i>
+        <h3>$86K+</h3>
+        <p>Raised for Education</p>
       </div>
     </div>
-    <div class="form-group">
-      <label for="date">📅 Date (Weekends Only)</label>
-      <input type="date" id="date" required>
+  </section>
+  
+  <div class="container">
+    <div class="booking-form">
+      <h2 style="text-align: center; margin-bottom: 25px; color: var(--accent);"><i class="fas fa-calendar-plus"></i> Make a Booking</h2>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name"><i class="fas fa-user"></i> Full Name</label>
+          <input type="text" id="name" placeholder="e.g., John Doe" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email"><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" id="email" placeholder="e.g., john@example.com" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone"><i class="fas fa-phone"></i> Phone (+60)</label>
+          <input type="tel" id="phone" pattern="^\+60[0-9]{8,10}$" placeholder="+60123456789" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="date"><i class="fas fa-calendar-day"></i> Date (Weekends Only)</label>
+          <input type="date" id="date" required>
+        </div>
+        
+        <div class="form-group full-width">
+          <label><i class="fas fa-archway"></i> Facilities (select one or more)</label>
+          <div class="checkbox-group" id="facility-options">
+            <label><input type="checkbox" value="Swimming Pool ($23/hr)"> Swimming Pool ($23/hr)</label>
+            <label><input type="checkbox" value="Football Field A ($15/hr)"> Football Field A ($15/hr)</label>
+            <label><input type="checkbox" value="Football Field B ($15/hr)"> Football Field B ($15/hr)</label>
+            <label><input type="checkbox" value="Tennis Court A ($12/hr)"> Tennis Court A ($12/hr)</label>
+            <label><input type="checkbox" value="Tennis Court B ($12/hr)"> Tennis Court B ($12/hr)</label>
+            <label><input type="checkbox" value="Tennis Court C ($12/hr)"> Tennis Court C ($12/hr)</label>
+            <label><input type="checkbox" value="Volleyball Court A ($12/hr)"> Volleyball Court A ($12/hr)</label>
+            <label><input type="checkbox" value="Volleyball Court B ($12/hr)"> Volleyball Court B ($12/hr)</label>
+            <label><input type="checkbox" value="Volleyball Court C ($12/hr)"> Volleyball Court C ($12/hr)</label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="time"><i class="fas fa-clock"></i> Time Slot</label>
+          <select id="time" required>
+            <option value="">Select Time</option>
+            <option value="8:00–9:00 AM">8:00–9:00 AM</option>
+            <option value="9:00–10:00 AM">9:00–10:00 AM</option>
+            <option value="10:00–11:00 AM">10:00–11:00 AM</option>
+            <option value="11:00 AM–12:00 PM">11:00 AM–12:00 PM</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="duration"><i class="fas fa-hourglass-half"></i> Duration</label>
+          <select id="duration" required>
+            <option value="">Select Duration</option>
+            <option value="1">1 hour</option>
+            <option value="2">2 hours</option>
+            <option value="3">3 hours</option>
+            <option value="4">4 hours</option>
+          </select>
+        </div>
+        
+        <div class="form-group full-width">
+          <div class="form-rules">
+            <input type="checkbox" id="rules" required>
+            <label for="rules">I agree to the <a href="#" style="color: var(--accent);">terms and conditions</a> and understand that bookings are for weekends only.</label>
+          </div>
+        </div>
+        
+        <div class="form-group full-width">
+          <button id="submit-btn" onclick="submitBooking()">
+            <i class="fas fa-paper-plane"></i> Submit Booking
+          </button>
+        </div>
+      </div>
+      
+      <div id="status"></div>
     </div>
-    <div class="form-group">
-      <label for="time">⏰ Time Slot</label>
-      <select id="time" required>
-        <option value="8:00–9:00 AM">8:00–9:00 AM</option>
-        <option value="9:00–10:00 AM">9:00–10:00 AM</option>
-        <option value="10:00–11:00 AM">10:00–11:00 AM</option>
-        <option value="11:00 AM–12:00 PM">11:00 AM–12:00 PM</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="duration">⏳ Duration</label>
-      <select id="duration" required>
-        <option value="1">1 hour</option>
-        <option value="2">2 hours</option>
-        <option value="3">3 hours</option>
-        <option value="4">4 hours</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <input type="checkbox" id="rules" required>
-      <label for="rules"> I agree to the terms and conditions</label>
-    </div>
-    <button onclick="submitBooking()">🚀 Submit Booking</button>
-    <div id="status"></div>
-    <div class="qr-code">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.thexdschool.com/" alt="Website QR Code">
-      <p>🌐 To know more visit our website: <a href="https://www.thexdschool.com/" target="_blank">https://www.thexdschool.com/</a></p>
+    
+    <div class="confirmation" id="confirmation">
+      <h3><i class="fas fa-check-circle"></i> Booking Confirmed!</h3>
+      
+      <div class="confirmation-details">
+        <div class="detail-card">
+          <h4>Booking Details</h4>
+          <p id="conf-booking-id">XD-845219</p>
+          <p id="conf-date">Saturday, July 12, 2025</p>
+          <p id="conf-time">9:00–10:00 AM</p>
+          <p id="conf-duration">2 hours</p>
+        </div>
+        
+        <div class="detail-card">
+          <h4>Facilities Booked</h4>
+          <p id="conf-facilities">Swimming Pool, Football Field A</p>
+        </div>
+        
+        <div class="detail-card">
+          <h4>Personal Information</h4>
+          <p id="conf-name">John Doe</p>
+          <p id="conf-email">john@example.com</p>
+          <p id="conf-phone">+60123456789</p>
+        </div>
+        
+        <div class="detail-card">
+          <h4>Payment Summary</h4>
+          <p>Subtotal: <span id="conf-subtotal">$76.00</span></p>
+          <p>Service Fee: <span id="conf-fee">$3.80</span></p>
+          <p>Total: <span id="conf-total">$79.80</span></p>
+          <p style="color: var(--accent); font-weight: bold;">Status: <span id="conf-status">Paid</span></p>
+        </div>
+      </div>
+      
+      <div class="revenue-impact">
+        <h4><i class="fas fa-heart"></i> Your Impact</h4>
+        <p>🌟 Because of your booking, 10 students will receive educational supplies this month! ❤️</p>
+        <p>Your support is transforming lives and creating brighter futures.</p>
+      </div>
+      
+      <div class="qr-code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.thexdschool.com/booking-confirmed" alt="Booking QR Code">
+        <p class="qr-text">Scan QR code for booking details or visit: <a href="https://www.thexdschool.com/" target="_blank">https://www.thexdschool.com/</a></p>
+      </div>
     </div>
   </div>
+  
   <footer>
-    © 2025 XD School. All rights reserved.
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p>© 2025 XD School. All rights reserved.</p>
+    <p style="margin-top: 10px; font-size: 0.9rem;">Every booking supports the education of underprivileged children</p>
   </footer>
+  
   <script>
+    // Google Apps Script URL for the Sheet: 
+    // https://docs.google.com/spreadsheets/d/18R9SbkJz8Mjc3WK7B7d0niFeztQMqpBSio0cdvtWA7w/edit?usp=sharing
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzARMz0TOrJcLUo2mDc0v8hBK8zwXcEOlMZ-xuGKa6mlg1tGb2k2d8q915jk8Z9ChBQNg/exec';
+    
     document.addEventListener('DOMContentLoaded', () => {
       const dateInput = document.getElementById('date');
-      dateInput.min = new Date().toISOString().split('T')[0];
-      dateInput.addEventListener('change', function () {
+      const today = new Date();
+      const nextWeekend = new Date(today);
+      
+      // Set min date to next Saturday
+      const daysUntilSaturday = (6 - today.getDay() + 7) % 7 || 7;
+      nextWeekend.setDate(today.getDate() + daysUntilSaturday);
+      
+      const minDate = nextWeekend.toISOString().split('T')[0];
+      dateInput.min = minDate;
+      
+      dateInput.addEventListener('change', function() {
         const selectedDate = new Date(this.value);
         const day = selectedDate.getDay();
         if (day !== 0 && day !== 6) {
-          alert('Please select a Saturday or Sunday.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Invalid Date',
+            text: 'Please select a Saturday or Sunday.',
+            confirmButtonColor: '#00e5ff'
+          });
           this.value = '';
         }
       });
     });
 
-    function submitBooking() {
+    async function submitBooking() {
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const phone = document.getElementById('phone').value.trim();
@@ -213,31 +644,47 @@
       // Validate weekend date
       const selectedDate = new Date(date);
       const day = selectedDate.getDay();
-      if (day !== 0 && day !== 6 && date) {
-        document.getElementById('status').innerText = '⚠️ Please select a Saturday or Sunday.';
+      if ((day !== 0 && day !== 6) || !date) {
+        document.getElementById('status').innerHTML = `<div class="alert-error">⚠️ Please select a Saturday or Sunday.</div>`;
         return;
       }
 
-      if (!name || !email || !phone || facilities.length === 0 || !date || !time || !duration || !rules) {
-        document.getElementById('status').innerText = '⚠️ Please fill all fields correctly.';
+      if (!name || !email || !phone || facilities.length === 0 || !time || !duration || !rules) {
+        document.getElementById('status').innerHTML = `<div class="alert-error">⚠️ Please fill all fields correctly.</div>`;
         return;
       }
 
-      const revenue = calculateRevenue(facilities.join(', '), duration);
-      const bookingID = Date.now().toString();
+      // Generate booking ID
+      const bookingID = 'XD-' + Math.floor(100000 + Math.random() * 900000);
+      
+      // Calculate revenue
+      const revenue = calculateRevenue(facilities, duration);
+      const subtotal = revenue;
+      const fee = parseFloat((subtotal * 0.05).toFixed(2));
+      const total = subtotal + fee;
 
-      // Update status with submission message
-      const statusDiv = document.getElementById('status');
-      statusDiv.innerHTML = `
-        <div class="thank-you">
-          🎉 Thank you for your booking! 🌟<br>
-          Your request is being processed, and an email confirmation will be sent if successful. ⏳<br><br>
-          🌟 Because of you, 10 students will walk into school with confidence, dignity, and hope. ❤️<br>
-          Your support means more than you know! 🎉<br><br>
-        </div>
-      `;
+      // Update confirmation details
+      document.getElementById('conf-booking-id').textContent = bookingID;
+      document.getElementById('conf-name').textContent = name;
+      document.getElementById('conf-email').textContent = email;
+      document.getElementById('conf-phone').textContent = phone;
+      document.getElementById('conf-facilities').textContent = facilities.join(', ');
+      
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('conf-date').textContent = selectedDate.toLocaleDateString('en-US', options);
+      document.getElementById('conf-time').textContent = time;
+      document.getElementById('conf-duration').textContent = duration + ' hour' + (duration > 1 ? 's' : '');
+      document.getElementById('conf-subtotal').textContent = '$' + subtotal.toFixed(2);
+      document.getElementById('conf-fee').textContent = '$' + fee.toFixed(2);
+      document.getElementById('conf-total').textContent = '$' + total.toFixed(2);
 
-      const data = {
+      // Show loading state
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processing...`;
+      submitBtn.disabled = true;
+      
+      // Prepare data for Google Sheets
+      const formData = {
         name,
         email,
         phone,
@@ -245,31 +692,56 @@
         date,
         time,
         duration,
-        revenue,
+        revenue: total,
         bookingID
       };
-
-      // Send data to Google Apps Script
-      fetch('https://script.google.com/macros/s/AKfycbz3PmWBGXr4Pg1lB8mqzMWi4q2G_cwjtkHpZTmyEGQqGPmJDBmeIWQW3KBFk6geEzBR/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => response.text())
-      .then(text => {
-        console.log('Response received:', text);
-        if (text.includes("Success")) {
-          statusDiv.innerHTML += '<p style="color: #00ff00;">✅ Submission successful. Check your email!</p>';
+      
+      try {
+        // Send data to Google Sheets
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        const result = await response.text();
+        
+        if (result === "Success") {
+          // Show success message
+          Swal.fire({
+            title: 'Booking Successful!',
+            text: 'Your booking has been confirmed. A confirmation email has been sent.',
+            icon: 'success',
+            confirmButtonColor: '#00e5ff',
+            confirmButtonText: 'View Details'
+          });
+          
+          // Show confirmation section
+          document.querySelector('.booking-form').style.display = 'none';
+          document.getElementById('confirmation').classList.add('active');
         } else {
-          statusDiv.innerHTML += '<p style="color: #ff4444;">⚠️ Submission failed: ' + text + '</p>';
+          Swal.fire({
+            title: 'Submission Error',
+            text: 'Failed to save booking. Please try again.',
+            icon: 'error',
+            confirmButtonColor: '#00e5ff'
+          });
         }
-      })
-      .catch(error => {
-        console.error('Error submitting data:', error);
-        statusDiv.innerHTML += '<p style="color: #ff4444;">⚠️ Submission failed. Please try again or contact support.</p>';
-      });
+      } catch (error) {
+        console.error('Error:', error);
+        Swal.fire({
+          title: 'Network Error',
+          text: 'Could not connect to server. Please check your connection.',
+          icon: 'error',
+          confirmButtonColor: '#00e5ff'
+        });
+      } finally {
+        // Reset form
+        submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Submit Booking`;
+        submitBtn.disabled = false;
+      }
     }
 
     function calculateRevenue(facilities, duration) {
@@ -284,10 +756,12 @@
         'Volleyball Court B ($12/hr)': 12,
         'Volleyball Court C ($12/hr)': 12
       };
+      
       const hours = parseInt(duration) || 1;
-      const facilityList = facilities.split(', ');
-      return facilityList.reduce((total, facility) => {
-        return total + ((rates[facility.trim()] || 0) * hours);
+      return facilities.reduce((total, facility) => {
+        return total + ((rates[facility] || 0) * hours);
       }, 0);
     }
   </script>
+</body>
+</html>
