@@ -184,7 +184,7 @@
     </div>
   </div>
   <footer>
-    &copy; 2025 XD School. All rights reserved.
+    © 2025 XD School. All rights reserved.
   </footer>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -210,6 +210,14 @@
       const duration = document.getElementById('duration').value;
       const rules = document.getElementById('rules').checked;
 
+      // Validate weekend date
+      const selectedDate = new Date(date);
+      const day = selectedDate.getDay();
+      if (day !== 0 && day !== 6 && date) {
+        document.getElementById('status').innerText = '⚠️ Please select a Saturday or Sunday.';
+        return;
+      }
+
       if (!name || !email || !phone || facilities.length === 0 || !date || !time || !duration || !rules) {
         document.getElementById('status').innerText = '⚠️ Please fill all fields correctly.';
         return;
@@ -218,16 +226,14 @@
       const revenue = calculateRevenue(facilities.join(', '), duration);
       const bookingID = Date.now().toString();
 
-      document.querySelector('.container').innerHTML = `
+      // Add thank-you message
+      const statusDiv = document.getElementById('status');
+      statusDiv.innerHTML = `
         <div class="thank-you">
           🎉 Thank you for your booking! 🌟<br>
           Your request has been received, and we’ll get back to you within 24 hours. ⏳<br><br>
           🌟 Because of you, 10 students will walk into school with confidence, dignity, and hope. ❤️<br>
           Your support means more than you know! 🎉<br><br>
-        </div>
-        <div class="qr-code">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.thexdschool.com/" alt="Website QR Code">
-          <p>🌐 To know more visit our website: <a href="https://www.thexdschool.com/" target="_blank">https://www.thexdschool.com/</a></p>
         </div>
       `;
 
@@ -249,7 +255,7 @@
         Best regards,\n
         XD School Team
       `;
-      alert(`Email sent to ${email}:\n${message}`);
+      alert(`Email sent to ${email}:\n${message}`); // Simulated email
 
       const data = {
         name,
@@ -263,6 +269,7 @@
         bookingID
       };
 
+      // Send data to Google Apps Script
       fetch('https://script.google.com/macros/s/AKfycbz4leVn7hNm3d-s8bF_kYmYcf1FGOIwF-VIPehkCd6kvd3jKijmnTFRtdFC_y8uDBHE/exec', {
         method: 'POST',
         mode: 'no-cors',
@@ -270,6 +277,13 @@
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
+      })
+      .then(() => {
+        console.log('Data submitted to Google Sheet');
+      })
+      .catch(error => {
+        console.error('Error submitting data:', error);
+        statusDiv.innerHTML += '<p style="color: #ff4444;">⚠️ Submission to Google Sheet failed. Please try again or contact support.</p>';
       });
     }
 
@@ -292,5 +306,3 @@
       }, 0);
     }
   </script>
-</body>
-</html>
