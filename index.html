@@ -3,18 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XD School Booking System</title>
+  <title>XD School Booking</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     :root {
       --primary: #004e92;
       --secondary: #000428;
       --accent: #00e5ff;
       --light: #b3ecff;
-      --success: #4CAF50;
-      --danger: #f44336;
       --dark: #001f3f;
       --card-bg: rgba(255, 255, 255, 0.1);
     }
@@ -43,16 +40,8 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
     .logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 15px;
     }
@@ -67,110 +56,42 @@
       background: linear-gradient(to right, var(--accent), #00ffcc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 25px;
-    }
-    
-    nav a {
-      color: var(--light);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      padding: 8px 12px;
-      border-radius: 5px;
-    }
-    
-    nav a:hover {
-      color: var(--accent);
-      background: rgba(255,255,255,0.1);
     }
     
     .hero {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 30px auto;
-      padding: 40px 20px;
+      padding: 30px 20px;
       text-align: center;
     }
     
     .hero h1 {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       color: var(--accent);
       margin-bottom: 15px;
       text-shadow: 0 2px 10px rgba(0,229,255,0.4);
     }
     
     .hero p {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--light);
-      max-width: 800px;
+      max-width: 700px;
       margin: 0 auto 25px;
       line-height: 1.7;
     }
     
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-top: 30px;
-      flex-wrap: wrap;
-    }
-    
-    .stat-card {
-      background: rgba(0,0,0,0.2);
-      padding: 20px;
-      border-radius: 12px;
-      min-width: 200px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-    }
-    
-    .stat-card:hover {
-      transform: translateY(-5px);
-    }
-    
-    .stat-card i {
-      font-size: 2.5rem;
-      color: var(--accent);
-      margin-bottom: 15px;
-    }
-    
-    .stat-card h3 {
-      font-size: 2rem;
-      margin-bottom: 5px;
-    }
-    
-    .stat-card p {
-      font-size: 1rem;
-      color: var(--light);
-    }
-    
     .container {
-      max-width: 900px;
+      max-width: 700px;
       margin: 30px auto;
       background: var(--card-bg);
-      padding: 35px;
-      border-radius: 18px;
+      padding: 30px;
+      border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-    
     .form-group {
-      margin-bottom: 22px;
-    }
-    
-    .form-group.full-width {
-      grid-column: span 2;
+      margin-bottom: 20px;
+      position: relative;
     }
     
     label {
@@ -191,13 +112,17 @@
     input[type="date"],
     select {
       width: 100%;
-      padding: 14px;
+      padding: 14px 14px 14px 40px;
       border-radius: 8px;
       border: 2px solid rgba(255,255,255,0.2);
       background: rgba(0,0,0,0.2);
       color: white;
       font-size: 1.05rem;
-      transition: all 0.3s ease;
+    }
+    
+    input[type="date"] {
+      background: rgba(0,0,0,0.2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z'/%3E%3C/svg%3E") no-repeat 15px center;
+      background-size: 20px;
     }
     
     input:focus, select:focus {
@@ -209,7 +134,7 @@
     .checkbox-group {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 12px;
+      gap: 10px;
       margin-top: 10px;
     }
     
@@ -217,10 +142,9 @@
       display: flex;
       align-items: center;
       background-color: rgba(0,0,0,0.2);
-      padding: 14px;
+      padding: 12px;
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.2s ease;
       border: 2px solid transparent;
     }
     
@@ -230,7 +154,7 @@
     }
     
     .checkbox-group input[type="checkbox"] {
-      margin-right: 12px;
+      margin-right: 10px;
       width: 20px;
       height: 20px;
       accent-color: var(--accent);
@@ -239,7 +163,7 @@
     .form-rules {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       margin: 20px 0;
     }
     
@@ -259,7 +183,6 @@
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,229,255,0.3);
     }
     
     button:hover {
@@ -267,13 +190,9 @@
       box-shadow: 0 6px 20px rgba(0,229,255,0.5);
     }
     
-    button:active {
-      transform: translateY(-1px);
-    }
-    
     #status {
-      margin-top: 30px;
-      padding: 25px;
+      margin-top: 25px;
+      padding: 20px;
       background: rgba(0, 0, 0, 0.25);
       border-radius: 12px;
       font-size: 1.1rem;
@@ -298,25 +217,25 @@
     .confirmation-details {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 15px;
       margin: 20px 0;
     }
     
     .detail-card {
       background: rgba(0,0,0,0.15);
-      padding: 20px;
+      padding: 15px;
       border-radius: 10px;
       border-left: 4px solid var(--accent);
     }
     
     .detail-card h4 {
       font-size: 1.1rem;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       color: var(--accent);
     }
     
     .detail-card p {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     
     .revenue-impact {
@@ -324,34 +243,33 @@
       padding: 20px;
       background: linear-gradient(to right, rgba(0,78,146,0.4), rgba(0,4,40,0.4));
       border-radius: 12px;
-      margin: 25px 0;
+      margin: 20px 0;
     }
     
     .qr-code {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 25px;
       padding-top: 20px;
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     
     .qr-code img {
-      width: 150px;
-      height: 150px;
+      width: 130px;
+      height: 130px;
       background: white;
       padding: 10px;
       border-radius: 10px;
     }
     
     .qr-text {
-      margin-top: 15px;
-      font-size: 1.1rem;
+      margin-top: 12px;
+      font-size: 1rem;
     }
     
     .qr-text a {
       color: var(--accent);
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.3s ease;
     }
     
     .qr-text a:hover {
@@ -359,10 +277,10 @@
     }
     
     footer {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 40px auto 0;
       text-align: center;
-      padding: 25px;
+      padding: 20px;
       background-color: var(--dark);
       border-radius: 15px;
       color: #aaa;
@@ -371,199 +289,162 @@
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin: 20px 0;
+      gap: 25px;
+      margin: 25px 0;
     }
     
     .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
       color: var(--light);
       font-size: 1.5rem;
       transition: all 0.3s ease;
     }
     
     .social-links a:hover {
-      color: var(--accent);
-      transform: translateY(-3px);
+      background: var(--accent);
+      color: var(--dark);
+      transform: translateY(-5px);
+    }
+    
+    .alert {
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .alert-success {
+      background: rgba(76, 175, 80, 0.2);
+      border: 1px solid #4CAF50;
     }
     
     .alert-error {
       background: rgba(244, 67, 54, 0.2);
-      border: 1px solid var(--danger);
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-    
-    .network-status {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    
-    .network-status.offline {
-      background: rgba(244, 67, 54, 0.2);
-      border: 1px solid var(--danger);
-    }
-    
-    .network-status.online {
-      background: rgba(76, 175, 80, 0.2);
-      border: 1px solid var(--success);
+      border: 1px solid #f44336;
     }
     
     @media (max-width: 768px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .form-group.full-width {
-        grid-column: span 1;
-      }
-      
-      .header-content {
-        flex-direction: column;
-        gap: 15px;
-      }
-      
       .confirmation-details {
         grid-template-columns: 1fr;
       }
       
       .hero h1 {
-        font-size: 2.3rem;
+        font-size: 2rem;
       }
       
       .hero p {
-        font-size: 1.1rem;
+        font-size: 1rem;
+      }
+      
+      .social-links {
+        gap: 15px;
+      }
+      
+      .social-links a {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-content">
-      <div class="logo">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMGU1ZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMiA5aDRhMiAyIDAgMCAxIDIgMnYyYTIgMiAwIDAgMS0yIDJIMnYtNnptMTYgMGg0djZoLTJhMiAyIDAgMCAxLTItMnYtMmEyIDIgMCAwIDEgMi0yem0tOCA0aDR2LTZoLTR2NnptNi00YTIgMiAwIDEgMS00IDAgMiAyIDAgMCAxIDQgMHoiLz48L3N2Zz4=" alt="XD Schools Logo">
-        <div class="logo-text">XD School</div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="#"><i class="fas fa-calendar-alt"></i> Bookings</a></li>
-          <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
-          <li><a href="#"><i class="fas fa-phone"></i> Contact</a></li>
-        </ul>
-      </nav>
+    <div class="logo">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24'%3E%3Cpath fill='%2300e5ff' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/%3E%3C/svg%3E" alt="XD Schools Logo">
+      <div class="logo-text">XD School</div>
     </div>
   </header>
   
   <section class="hero">
-    <h1>XD School Booking System</h1>
+    <h1>XD School Booking</h1>
     <p>🎯 Book, Play, Empower! 🌟 Transform lives with every booking—support 10 underprivileged students to shine brightly! 💖</p>
-    
-    <div class="hero-stats">
-      <div class="stat-card">
-        <i class="fas fa-users"></i>
-        <h3>1,250+</h3>
-        <p>Students Supported</p>
-      </div>
-      <div class="stat-card">
-        <i class="fas fa-calendar-check"></i>
-        <h3>4,800+</h3>
-        <p>Bookings Made</p>
-      </div>
-      <div class="stat-card">
-        <i class="fas fa-donate"></i>
-        <h3>$86K+</h3>
-        <p>Raised for Education</p>
-      </div>
-    </div>
   </section>
   
   <div class="container">
     <div class="booking-form">
-      <h2 style="text-align: center; margin-bottom: 25px; color: var(--accent);"><i class="fas fa-calendar-plus"></i> Make a Booking</h2>
+      <h2 style="text-align: center; margin-bottom: 20px; color: var(--accent);"><i class="fas fa-calendar-plus"></i> Make a Booking</h2>
       
-      <div id="network-status" class="network-status">
-        <i class="fas fa-wifi"></i> Checking network connection...
+      <div class="form-group">
+        <label for="name"><i class="fas fa-user"></i> Full Name</label>
+        <input type="text" id="name" placeholder="e.g., John Doe" required>
       </div>
       
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="name"><i class="fas fa-user"></i> Full Name</label>
-          <input type="text" id="name" placeholder="e.g., John Doe" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="email"><i class="fas fa-envelope"></i> Email</label>
-          <input type="email" id="email" placeholder="e.g., john@example.com" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="phone"><i class="fas fa-phone"></i> Phone (+60)</label>
-          <input type="tel" id="phone" pattern="^\+60[0-9]{8,10}$" placeholder="+60123456789" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="date"><i class="fas fa-calendar-day"></i> Date (Weekends Only)</label>
-          <input type="date" id="date" required>
-        </div>
-        
-        <div class="form-group full-width">
-          <label><i class="fas fa-archway"></i> Facilities (select one or more)</label>
-          <div class="checkbox-group" id="facility-options">
-            <label><input type="checkbox" value="Swimming Pool ($23/hr)"> Swimming Pool ($23/hr)</label>
-            <label><input type="checkbox" value="Football Field A ($15/hr)"> Football Field A ($15/hr)</label>
-            <label><input type="checkbox" value="Football Field B ($15/hr)"> Football Field B ($15/hr)</label>
-            <label><input type="checkbox" value="Tennis Court A ($12/hr)"> Tennis Court A ($12/hr)</label>
-            <label><input type="checkbox" value="Tennis Court B ($12/hr)"> Tennis Court B ($12/hr)</label>
-            <label><input type="checkbox" value="Tennis Court C ($12/hr)"> Tennis Court C ($12/hr)</label>
-            <label><input type="checkbox" value="Volleyball Court A ($12/hr)"> Volleyball Court A ($12/hr)</label>
-            <label><input type="checkbox" value="Volleyball Court B ($12/hr)"> Volleyball Court B ($12/hr)</label>
-            <label><input type="checkbox" value="Volleyball Court C ($12/hr)"> Volleyball Court C ($12/hr)</label>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="time"><i class="fas fa-clock"></i> Time Slot</label>
-          <select id="time" required>
-            <option value="">Select Time</option>
-            <option value="8:00–9:00 AM">8:00–9:00 AM</option>
-            <option value="9:00–10:00 AM">9:00–10:00 AM</option>
-            <option value="10:00–11:00 AM">10:00–11:00 AM</option>
-            <option value="11:00 AM–12:00 PM">11:00 AM–12:00 PM</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="duration"><i class="fas fa-hourglass-half"></i> Duration</label>
-          <select id="duration" required>
-            <option value="">Select Duration</option>
-            <option value="1">1 hour</option>
-            <option value="2">2 hours</option>
-            <option value="3">3 hours</option>
-            <option value="4">4 hours</option>
-          </select>
-        </div>
-        
-        <div class="form-group full-width">
-          <div class="form-rules">
-            <input type="checkbox" id="rules" required>
-            <label for="rules">I agree to the <a href="#" style="color: var(--accent);">terms and conditions</a> and understand that bookings are for weekends only.</label>
-          </div>
-        </div>
-        
-        <div class="form-group full-width">
-          <button id="submit-btn" onclick="submitBooking()">
-            <i class="fas fa-paper-plane"></i> Submit Booking
-          </button>
+      <div class="form-group">
+        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+        <input type="email" id="email" placeholder="e.g., john@example.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone"><i class="fas fa-phone"></i> Phone (+60)</label>
+        <input type="tel" id="phone" placeholder="+60123456789" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="date"><i class="fas fa-calendar-day"></i> Date (Weekends Only)</label>
+        <input type="date" id="date" required>
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-archway"></i> Facilities (select one or more)</label>
+        <div class="checkbox-group" id="facility-options">
+          <label><input type="checkbox" value="Swimming Pool ($23/hr)"> Swimming Pool ($23/hr)</label>
+          <label><input type="checkbox" value="Football Field A ($15/hr)"> Football Field A ($15/hr)</label>
+          <label><input type="checkbox" value="Football Field B ($15/hr)"> Football Field B ($15/hr)</label>
+          <label><input type="checkbox" value="Tennis Court A ($12/hr)"> Tennis Court A ($12/hr)</label>
+          <label><input type="checkbox" value="Tennis Court B ($12/hr)"> Tennis Court B ($12/hr)</label>
+          <label><input type="checkbox" value="Tennis Court C ($12/hr)"> Tennis Court C ($12/hr)</label>
+          <label><input type="checkbox" value="Volleyball Court A ($12/hr)"> Volleyball Court A ($12/hr)</label>
+          <label><input type="checkbox" value="Volleyball Court B ($12/hr)"> Volleyball Court B ($12/hr)</label>
+          <label><input type="checkbox" value="Volleyball Court C ($12/hr)"> Volleyball Court C ($12/hr)</label>
         </div>
       </div>
       
-      <div id="status"></div>
+      <div class="form-group">
+        <label for="time"><i class="fas fa-clock"></i> Time Slot</label>
+        <select id="time" required>
+          <option value="">Select Time</option>
+          <option value="8:00–9:00 AM">8:00–9:00 AM</option>
+          <option value="9:00–10:00 AM">9:00–10:00 AM</option>
+          <option value="10:00–11:00 AM">10:00–11:00 AM</option>
+          <option value="11:00 AM–12:00 PM">11:00 AM–12:00 PM</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="duration"><i class="fas fa-hourglass-half"></i> Duration</label>
+        <select id="duration" required>
+          <option value="">Select Duration</option>
+          <option value="1">1 hour</option>
+          <option value="2">2 hours</option>
+          <option value="3">3 hours</option>
+          <option value="4">4 hours</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <div class="form-rules">
+          <input type="checkbox" id="rules" required>
+          <label for="rules">I agree to the <a href="https://www.thexdschool.com/terms" style="color: var(--accent);" target="_blank">terms and conditions</a></label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <button id="submit-btn">
+          <i class="fas fa-paper-plane"></i> Submit Booking
+        </button>
+      </div>
+      
+      <div id="status" role="alert" aria-live="polite"></div>
     </div>
     
-    <div class="confirmation" id="confirmation">
+    <div class="confirmation" id="confirmation" role="region" aria-label="Booking Confirmation">
       <h3><i class="fas fa-check-circle"></i> Booking Confirmed!</h3>
       
       <div class="confirmation-details">
@@ -590,8 +471,7 @@
         <div class="detail-card">
           <h4>Payment Summary</h4>
           <p>Subtotal: <span id="conf-subtotal">$76.00</span></p>
-          <p>Service Fee: <span id="conf-fee">$3.80</span></p>
-          <p>Total: <span id="conf-total">$79.80</span></p>
+          <p>Total: <span id="conf-total">$76.00</span></p>
           <p style="color: var(--accent); font-weight: bold;">Status: <span id="conf-status">Paid</span></p>
         </div>
       </div>
@@ -599,51 +479,46 @@
       <div class="revenue-impact">
         <h4><i class="fas fa-heart"></i> Your Impact</h4>
         <p>🌟 Because of your booking, 10 students will receive educational supplies this month! ❤️</p>
-        <p>Your support is transforming lives and creating brighter futures.</p>
       </div>
       
       <div class="qr-code">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.thexdschool.com/booking-confirmed" alt="Booking QR Code">
-        <p class="qr-text">Scan QR code for booking details or visit: <a href="https://www.thexdschool.com/" target="_blank">https://www.thexdschool.com/</a></p>
+        <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.thexdschool.com/booking-confirmed" alt="Booking QR Code">
+        <p class="qr-text">Visit: <a href="https://www.thexdschool.com/" target="_blank">https://www.thexdschool.com/</a></p>
+      </div>
+      
+      <div class="form-group">
+        <button onclick="resetForm()">
+          <i class="fas fa-plus-circle"></i> Book Another
+        </button>
       </div>
     </div>
   </div>
   
   <footer>
     <div class="social-links">
-      <a href="#"><i class="fab fa-facebook"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.linkedin.com/showcase/xd-school/" target="_blank" title="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://www.instagram.com/thexdschool?igsh=MWxkZjE5d3E0ZW11MA==" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.thexdschool.com/" target="_blank" title="Website">
+        <i class="fas fa-globe"></i>
+      </a>
+      <a href="https://youtube.com/@xtraordinarydigital?si=8hzlAM1vMKdgu27m" target="_blank" title="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
     </div>
     <p>© 2025 XD School. All rights reserved.</p>
-    <p style="margin-top: 10px; font-size: 0.9rem;">Every booking supports the education of underprivileged children</p>
+    <p>Every booking supports the education of underprivileged children</p>
   </footer>
   
   <script>
-    // Network status detection
-    function updateNetworkStatus() {
-      const statusElement = document.getElementById('network-status');
-      if (navigator.onLine) {
-        statusElement.innerHTML = '<i class="fas fa-wifi"></i> You are online - ready to submit bookings';
-        statusElement.className = 'network-status online';
-      } else {
-        statusElement.innerHTML = '<i class="fas fa-exclamation-triangle"></i> You are offline - bookings will be saved locally';
-        statusElement.className = 'network-status offline';
-      }
-    }
-    
-    // Google Apps Script URL for Sheet: 
-    // https://docs.google.com/spreadsheets/d/18R9SbkJz8Mjc3WK7B7d0niFeztQMqpBSio0cdvtWA7w/edit?usp=sharing
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxA_t7G_6VZIYyMpS9cI0qjMx8GHGMv4GLmlKIR7aR6zKi_ti7B9MpK0oUh9QjVfSaFXQ/exec';
-    
+    const CONFIG = {
+      GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbz3PmWBGXr4Pg1lB8mqzMWi4q2G_cwjtkHpZTmyEGQqGPmJDBmeIWQW3KBFk6geEzBR/exec'
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
-      // Initialize network status
-      updateNetworkStatus();
-      window.addEventListener('online', updateNetworkStatus);
-      window.addEventListener('offline', updateNetworkStatus);
-      
-      // Date setup
       const dateInput = document.getElementById('date');
       const today = new Date();
       const nextWeekend = new Date(today);
@@ -655,41 +530,61 @@
       const minDate = nextWeekend.toISOString().split('T')[0];
       dateInput.min = minDate;
       
-      dateInput.addEventListener('change', function() {
+      dateInput.addEventListener('input', function() {
         const selectedDate = new Date(this.value);
         const day = selectedDate.getDay();
         if (day !== 0 && day !== 6) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Invalid Date',
-            text: 'Please select a Saturday or Sunday.',
-            confirmButtonColor: '#00e5ff'
-          });
+          showStatus('⚠️ Please select a Saturday or Sunday.', 'error');
           this.value = '';
         }
       });
+      
+      // Form submission handler
+      document.getElementById('submit-btn').addEventListener('click', submitBooking);
     });
 
+    function sanitizeInput(input) {
+      return input.replace(/[<>&'"]/g, char => ({
+        '<': '&lt;',
+        '>': '&gt;',
+        '&': '&amp;',
+        "'": '&apos;',
+        '"': '&quot;'
+      }[char]));
+    }
+
     async function submitBooking() {
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
+      const name = sanitizeInput(document.getElementById('name').value.trim());
+      const email = sanitizeInput(document.getElementById('email').value.trim());
+      const phone = sanitizeInput(document.getElementById('phone').value.trim());
       const facilities = Array.from(document.querySelectorAll('#facility-options input:checked')).map(cb => cb.value);
       const date = document.getElementById('date').value;
       const time = document.getElementById('time').value;
       const duration = document.getElementById('duration').value;
       const rules = document.getElementById('rules').checked;
 
-      // Validate weekend date
+      // Validate inputs
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        showStatus('⚠️ Please enter a valid email address.', 'error');
+        return;
+      }
+
+      const phonePattern = /^\+60\s?\d{8,10}$/;
+      if (!phonePattern.test(phone)) {
+        showStatus('⚠️ Please enter a valid Malaysian phone number (e.g., +60123456789).', 'error');
+        return;
+      }
+
       const selectedDate = new Date(date);
       const day = selectedDate.getDay();
       if ((day !== 0 && day !== 6) || !date) {
-        document.getElementById('status').innerHTML = `<div class="alert-error">⚠️ Please select a Saturday or Sunday.</div>`;
+        showStatus('⚠️ Please select a Saturday or Sunday.', 'error');
         return;
       }
 
       if (!name || !email || !phone || facilities.length === 0 || !time || !duration || !rules) {
-        document.getElementById('status').innerHTML = `<div class="alert-error">⚠️ Please fill all fields correctly.</div>`;
+        showStatus('⚠️ Please fill all fields correctly.', 'error');
         return;
       }
 
@@ -698,9 +593,6 @@
       
       // Calculate revenue
       const revenue = calculateRevenue(facilities, duration);
-      const subtotal = revenue;
-      const fee = parseFloat((subtotal * 0.05).toFixed(2));
-      const total = subtotal + fee;
 
       // Update confirmation details
       document.getElementById('conf-booking-id').textContent = bookingID;
@@ -713,9 +605,12 @@
       document.getElementById('conf-date').textContent = selectedDate.toLocaleDateString('en-US', options);
       document.getElementById('conf-time').textContent = time;
       document.getElementById('conf-duration').textContent = duration + ' hour' + (duration > 1 ? 's' : '');
-      document.getElementById('conf-subtotal').textContent = '$' + subtotal.toFixed(2);
-      document.getElementById('conf-fee').textContent = '$' + fee.toFixed(2);
-      document.getElementById('conf-total').textContent = '$' + total.toFixed(2);
+      document.getElementById('conf-subtotal').textContent = '$' + revenue.toFixed(2);
+      document.getElementById('conf-total').textContent = '$' + revenue.toFixed(2);
+
+      // Update QR code
+      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.thexdschool.com/booking-confirmed?id=${bookingID}`;
+      document.getElementById('qr-code-img').src = qrCodeUrl;
 
       // Show loading state
       const submitBtn = document.getElementById('submit-btn');
@@ -731,71 +626,40 @@
         date,
         time,
         duration,
-        revenue: total,
+        revenue,
         bookingID
       };
       
       try {
-        // Send data to Google Sheets only if online
-        if (navigator.onLine) {
-          const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          });
-          
-          const result = await response.text();
-          
-          if (result === "Success") {
-            showSuccess();
-          } else {
-            Swal.fire({
-              title: 'Submission Error',
-              text: 'Failed to save booking. Please try again.',
-              icon: 'error',
-              confirmButtonColor: '#00e5ff'
-            });
-          }
+        const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          showStatus('✅ Booking submitted successfully! Check your email for confirmation.', 'success');
+          submitBtn.disabled = true; // Prevent resubmission
+          setTimeout(() => {
+            document.querySelector('.booking-form').style.display = 'none';
+            document.getElementById('confirmation').classList.add('active');
+          }, 2000);
         } else {
-          // If offline, show success and store locally
-          localStorage.setItem('pendingBooking', JSON.stringify(formData));
-          showSuccess();
-          Swal.fire({
-            title: 'Offline Mode',
-            text: 'Your booking has been saved locally and will be submitted when online',
-            icon: 'info',
-            confirmButtonColor: '#00e5ff'
-          });
+          showStatus(`⚠️ Submission failed: ${result.message || 'Unknown error'}`, 'error');
         }
       } catch (error) {
         console.error('Error:', error);
-        Swal.fire({
-          title: 'Network Error',
-          text: 'Could not connect to server. Please check your connection.',
-          icon: 'error',
-          confirmButtonColor: '#00e5ff'
-        });
+        showStatus('⚠️ Network error. Please try again or contact support.', 'error');
       } finally {
-        // Reset form
-        submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Submit Booking`;
-        submitBtn.disabled = false;
+        if (!document.getElementById('confirmation').classList.contains('active')) {
+          submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Submit Booking`;
+          submitBtn.disabled = false;
+        }
       }
-    }
-    
-    function showSuccess() {
-      Swal.fire({
-        title: 'Booking Successful!',
-        text: 'Your booking has been confirmed. A confirmation email has been sent.',
-        icon: 'success',
-        confirmButtonColor: '#00e5ff',
-        confirmButtonText: 'View Details'
-      });
-      
-      // Show confirmation section
-      document.querySelector('.booking-form').style.display = 'none';
-      document.getElementById('confirmation').classList.add('active');
     }
 
     function calculateRevenue(facilities, duration) {
@@ -817,34 +681,26 @@
       }, 0);
     }
     
-    // Check for pending bookings when coming online
-    window.addEventListener('online', async () => {
-      const pendingBooking = localStorage.getItem('pendingBooking');
-      if (pendingBooking) {
-        try {
-          const bookingData = JSON.parse(pendingBooking);
-          const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bookingData)
-          });
-          
-          if (response.ok) {
-            localStorage.removeItem('pendingBooking');
-            Swal.fire({
-              title: 'Pending Booking Submitted',
-              text: 'Your offline booking has been successfully submitted to our system',
-              icon: 'success',
-              confirmButtonColor: '#00e5ff'
-            });
-          }
-        } catch (error) {
-          console.error('Error submitting pending booking:', error);
-        }
+    function showStatus(message, type) {
+      const statusDiv = document.getElementById('status');
+      statusDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+      
+      if (type === 'success') {
+        setTimeout(() => {
+          statusDiv.innerHTML = '';
+        }, 5000);
       }
-    });
+    }
+
+    function resetForm() {
+      document.querySelector('.booking-form').style.display = 'block';
+      document.getElementById('confirmation').classList.remove('active');
+      document.querySelector('form').reset();
+      document.getElementById('status').innerHTML = '';
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Submit Booking`;
+      submitBtn.disabled = false;
+    }
   </script>
 </body>
 </html>
