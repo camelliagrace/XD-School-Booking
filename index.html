@@ -249,18 +249,22 @@
         bookingID
       };
 
-      // Send data to Google Apps Script
+      // Send data to Google Apps Script without no-cors
       fetch('https://script.google.com/macros/s/AKfycbz4leVn7hNm3d-s8bF_kYmYcf1FGOIwF-VIPehkCd6kvd3jKijmnTFRtdFC_y8uDBHE/exec', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       })
-      .then(() => {
-        console.log('Data submitted to Google Sheet');
-        statusDiv.innerHTML += '<p style="color: #00ff00;">✅ Submission successful. Check your email!</p>';
+      .then(response => response.text())
+      .then(text => {
+        console.log('Response received:', text);
+        if (text.includes("Success")) {
+          statusDiv.innerHTML += '<p style="color: #00ff00;">✅ Submission successful. Check your email!</p>';
+        } else {
+          statusDiv.innerHTML += '<p style="color: #ff4444;">⚠️ Submission failed: ' + text + '</p>';
+        }
       })
       .catch(error => {
         console.error('Error submitting data:', error);
