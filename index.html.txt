@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XD School Booking System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #003087;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 900px;
+            background: #004d99;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+            display: grid;
+            gap: 20px;
+        }
+        h1 {
+            color: #00ccff;
+            text-align: center;
+            text-shadow: 2px 2px #001a4d;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .logo {
+            width: 130px;
+            max-height: 130px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        .logo:hover {
+            transform: scale(1.1);
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            font-weight: 600;
+            color: #00ccff;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            background: #fff;
+            color: #003087;
+            border: 2px solid #00aaff;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #00ffcc;
+            outline: none;
+        }
+        input:invalid, select:invalid {
+            border-color: #ff4444;
+        }
+        input:valid, select:valid {
+            border-color: #00cc00;
+        }
+        select[multiple] {
+            height: 150px;
+        }
+        button {
+            background-color: #00ccff;
+            color: #003087;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #00aaff;
+        }
+        #status {
+            margin-top: 20px;
+            background: #003366;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .thank-you {
+            color: #00ffcc;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #001a4d;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            h1 { font-size: 2em; }
+        }
+        /* Just a quick note: styled this by hand for a clean look! */
+    </style>
+</head>
+<body>
+    <img src="xdschools-logo.jpg" alt="XD Schools Logo" class="logo">
+    <div class="container">
+        <h1>XD School Booking System</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #00ffcc;">Book, Play, Empower! 🌟 Transform lives with every booking—support 10 underprivileged students to shine brightly! 🎉❤️</p>
+        
+        <div class="form-group">
+            <label for="name">Full Name <span class="tooltip">📝<span class="tooltiptext">Enter your full name as per your ID.</span></span></label>
+            <input type="text" id="name" placeholder="e.g., John Doe" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address <span class="tooltip">✉️<span class="tooltiptext">Use a valid email for confirmation.</span></span></label>
+            <input type="email" id="email" placeholder="e.g., john@example.com" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone (WhatsApp, +60) <span class="tooltip">📞<span class="tooltiptext">Include country code, e.g., +60123456789.</span></span></label>
+            <input type="tel" id="phone" pattern="^\+60[0-9]{8,10}$" placeholder="+60123456789" required>
+        </div>
+        <div class="form-group">
+            <label for="facilities">Facilities (select multiple) <span class="tooltip">🏟️<span class="tooltiptext">Hold Ctrl (or Cmd) to select multiple.</span></span></label>
+            <select id="facilities" multiple size="5" required>
+                <option value="Swimming Pool ($23/hr)">Swimming Pool ($23/hr)</option>
+                <option value="Football Field A ($15/hr)">Football Field A ($15/hr)</option>
+                <option value="Football Field B ($15/hr)">Football Field B ($15/hr)</option>
+                <option value="Tennis Court A ($12/hr)">Tennis Court A ($12/hr)</option>
+                <option value="Tennis Court B ($12/hr)">Tennis Court B ($12/hr)</option>
+                <option value="Tennis Court C ($12/hr)">Tennis Court C ($12/hr)</option>
+                <option value="Volleyball Court A ($12/hr)">Volleyball Court A ($12/hr)</option>
+                <option value="Volleyball Court B ($12/hr)">Volleyball Court B ($12/hr)</option>
+                <option value="Volleyball Court C ($12/hr)">Volleyball Court C ($12/hr)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="date">Date (Weekends only) <span class="tooltip">📅<span class="tooltiptext">Only Saturdays and Sundays allowed.</span></span></label>
+            <input type="date" id="date" required>
+        </div>
+        <div class="form-group">
+            <label for="time">Time Slot <span class="tooltip">⏰<span class="tooltiptext">Choose your preferred slot.</span></span></label>
+            <select id="time" required>
+                <option value="8:00–9:00 AM">8:00–9:00 AM</option>
+                <option value="9:00–10:00 AM">9:00–10:00 AM</option>
+                <option value="10:00–11:00 AM">10:00–11:00 AM</option>
+                <option value="11:00 AM–12:00 PM">11:00 AM–12:00 PM</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="duration">Duration <span class="tooltip">⏳<span class="tooltiptext">Select your booking length.</span></span></label>
+            <select id="duration" required>
+                <option value="1 hour">1 hour</option>
+                <option value="2 hours">2 hours</option>
+                <option value="3 hours">3 hours</option>
+                <option value="4 hours">4 hours</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="rules" required> <label for="rules">I agree to the terms and conditions</label>
+        </div>
+        <button onclick="submitBooking()">Submit Booking</button>
+        <div id="status"></div>
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.thexdschool.com/" alt="Website QR Code">
+            <p>To know more visit our website: <a href="https://www.thexdschool.com/" style="color: #00ffcc; text-decoration: underline;" target="_blank">https://www.thexdschool.com/</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Restrict date to Saturdays and Sundays
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            dateInput.min = new Date().toISOString().split('T')[0]; // Start from today
+            dateInput.addEventListener('change', function() {
+                const selectedDate = new Date(this.value);
+                const day = selectedDate.getDay();
+                if (day !== 0 && day !== 6) { // 0 = Sunday, 6 = Saturday
+                    alert('Please select a Saturday or Sunday.');
+                    this.value = '';
+                }
+            });
+        });
+
+        function submitBooking() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const facilities = document.getElementById('facilities');
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const duration = document.getElementById('duration').value;
+            const rules = document.getElementById('rules').checked;
+
+            // Check all fields are filled
+            if (!name) {
+                document.getElementById('status').innerText = 'Please enter your full name.';
+                return;
+            }
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('status').innerText = 'Please enter a valid email address.';
+                return;
+            }
+            if (!phone || !/^\+60[0-9]{8,10}$/.test(phone)) {
+                document.getElementById('status').innerText = 'Please enter a valid phone number (e.g., +60123456789).';
+                return;
+            }
+            if (facilities.selectedOptions.length === 0) {
+                document.getElementById('status').innerText = 'Please select at least one facility.';
+                return;
+            }
+            if (!date) {
+                document.getElementById('status').innerText = 'Please select a date.';
+                return;
+            }
+            if (!time) {
+                document.getElementById('status').innerText = 'Please select a time slot.';
+                return;
+            }
+            if (!duration) {
+                document.getElementById('status').innerText = 'Please select a duration.';
+                return;
+            }
+            if (!rules) {
+                document.getElementById('status').innerText = 'Please agree to the terms and conditions.';
+                return;
+            }
+
+            const revenue = calculateRevenue(Array.from(facilities.selectedOptions).map(opt => opt.value).join(', '), duration);
+            const bookingID = Date.now().toString();
+
+            // Show thank you message
+            document.getElementById('status').innerHTML = `
+                <div class="thank-you">
+                    Thank you for your booking! 🌟<br>
+                    Your request has been received, and we’ll get back to you within 24 hours. ⏳<br><br>
+                    🌟 Because of you, 10 students will walk into school with confidence, dignity, and hope. ❤️<br>
+                    Your support means more than you know! 🎉<br><br>
+                    You can fill out this form only once.<br>
+                    Try contacting the owner of the form if you think this is a mistake.
+                </div>
+            `;
+
+            // Simulate email
+            const subject = "XD School Booking Confirmation";
+            const message = `
+                Dear ${name},\n\n
+                Thank you for your booking! 🌟\n
+                Details:\n
+                - Full Name: ${name}\n
+                - Email: ${email}\n
+                - Phone: ${phone}\n
+                - Facilities: ${Array.from(facilities.selectedOptions).map(opt => opt.value).join(', ')}\n
+                - Date: ${date}\n
+                - Time: ${time}\n
+                - Duration: ${duration}\n
+                - Total Revenue: $${revenue}\n\n
+                Please proceed to payment: https://example.com/payment?booking=${bookingID}\n\n
+                Best regards,\n
+                XD School Team
+            `;
+            alert(`Email sent to ${email}:\n${message}`); // Just a mock email for now
+        }
+
+        function calculateRevenue(facilities, duration) {
+            const rates = {
+                "Swimming Pool ($23/hr)": 23,
+                "Football Field A ($15/hr)": 15,
+                "Football Field B ($15/hr)": 15,
+                "Tennis Court A ($12/hr)": 12,
+                "Tennis Court B ($12/hr)": 12,
+                "Tennis Court C ($12/hr)": 12,
+                "Volleyball Court A ($12/hr)": 12,
+                "Volleyball Court B ($12/hr)": 12,
+                "Volleyball Court C ($12/hr)": 12
+            };
+            const hours = parseInt(duration.split(' ')[0]) || 1;
+            const facilityList = facilities.split(', ');
+            let total = 0;
+            facilityList.forEach(fac => total += (rates[fac.trim()] || 12) * hours);
+            return total;
+        }
+    </script>
